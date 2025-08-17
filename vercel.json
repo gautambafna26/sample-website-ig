@@ -1,12 +1,17 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/send-visit-notification.js", "use": "@vercel/node" },
+    { "src": "api/*.js", "use": "@vercel/node" },
     { "src": "index.html", "use": "@vercel/static" },
-    { "src": "assest/**", "use": "@vercel/static" }
+    { "src": "assest/*", "use": "@vercel/static" },
+    { "src": "*.mp3", "use": "@vercel/static" },
+    { "src": "*.jpg", "use": "@vercel/static" },
+    { "src": "*.jpeg", "use": "@vercel/static" },
+    { "src": "*.png", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/send-visit-notification" },
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/assest/(.*)", "dest": "/assest/$1" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }

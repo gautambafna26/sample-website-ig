@@ -411,9 +411,9 @@
                     <i class="fas fa-film text-white text-4xl md:text-6xl"></i>
                 </div>
                 <div class="text-center md:text-left bg-white/90 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-lg border border-pink-100 transform transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-1">
-                    <h3 class="text-2xl md:text-3xl font-semibold mb-4 text-rose-600">That Movie Night</h3>
+                    <h3 class="text-2xl md:text-3xl font-semibold mb-4 text-rose-600">The Memory That Still Feels Alive</h3>
                     <p class="text-gray-700 leading-relaxed">
-                        I still remember us watching a movie on April 7th. You looked so beautiful. I couldn't take my eyes off you—your hair, your smile, the way you looked at the screen. I can never forget your fragrance or the spark in that hug we shared afterward.
+                        I still remember that night on April 7th when we watched that movie together. You looked so beautiful, I couldn't take my eyes off you — your hair falling perfectly, that smile that always makes me weak, and the way your eyes were locked on the screen like you were lost in the story. I still remember us sitting on the floor when I made that silly joke and scared you — you looked so cute when you jumped. I was about to go to my room, but instead we stayed there, watching the movie. Then I pulled you close, felt the warmth of your body against mine… that hug, that cuddle — it felt like the world stopped for us. Your fragrance, your touch, the way you fit in my arms — that's the night our journey really started, and it's a memory I'll never forget.
                     </p>
                 </div>
             </div>
@@ -725,9 +725,6 @@
                 </svg>
             </div>
         </div>
-    </section>
-
-    <!-- Final Message & Call to Action -->
     <section id="final-message" class="min-h-screen flex flex-col items-center justify-center text-center bg-gray-800 py-20 px-4 md:px-8">
         <div class="container mx-auto max-w-3xl scroll-in-element">
             <h2 class="text-4xl md:text-5xl font-bold mb-8 text-red-400">My Deepest Wish</h2>
@@ -740,15 +737,167 @@
             </p>
             <!-- End of new paragraph -->
             <p class="text-lg md:text-xl text-gray-200 mb-10">
-                I even got a new job recently, but there was no one to share that moment with. Without you, it felt empty. If I had known that our last hug would be the final one, I would have never let you go. I feel incomplete without you.I miss you and I'am sorry
+                I even got a new job recently, but there was no one to share that moment with. Without you, it felt empty. If I had known that our last hug would be the final one, I would have never let you go. I feel incomplete without you. I miss you and I'm sorry.
+            </p>
+            
+            <!-- Heartfelt Question -->
+            <div id="questionContainer" class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl mb-8 border border-white/20">
+                <!-- Need Hug GIF -->
+                <div class="mb-6 flex justify-center">
+                    <div class="tenor-gif-embed max-w-xs" data-postid="17796352458623591242" data-share-method="host" data-aspect-ratio="1.375" data-width="100%">
+                        <a href="https://tenor.com/view/collapse-need-hug-need-reassurance-gif-17796352458623591242">Collapse Need Hug Sticker</a>
+                    </div>
+                    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+                </div>
+                
+                <p class="text-xl md:text-2xl text-white mb-6">
+                    I know we haven't talked in a while, but I miss you. Do you think we can talk about us?
+                </p>
+                <div id="buttonContainer" class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6 min-h-[60px] transition-all duration-300">
+                    <button id="yesBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 flex-1 sm:flex-none min-w-[180px] text-center">
+                        Yes, let's talk ❤️
+                    </button>
+                    <button id="noBtn" class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 flex-1 sm:flex-none min-w-[180px] text-center whitespace-nowrap">
+                        Not right now
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Response Message Overlay -->
+            <div id="responseOverlay" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+                <div class="bg-white p-8 rounded-2xl max-w-md mx-4 text-center">
+                    <p id="responseMessage" class="text-gray-800 text-lg mb-6"></p>
+                    <button id="closeResponseBtn" class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 px-6 rounded-full transition-colors">
+                        Close
+                    </button>
+                </div>
+            </div>
+            
+            <script>
+                // Handle Yes/No buttons with game-like interaction
+                document.addEventListener('DOMContentLoaded', function() {
+                    const yesBtn = document.getElementById('yesBtn');
+                    const noBtn = document.getElementById('noBtn');
+                    const responseOverlay = document.getElementById('responseOverlay');
+                    const responseMessage = document.getElementById('responseMessage');
+                    const closeResponseBtn = document.getElementById('closeResponseBtn');
+                    const questionText = document.querySelector('#questionContainer p');
+                    
+                    // Messages for the "No" button sequence
+                    const noMessages = [
+                        "Not right now",
+                        "Are you sure?",
+                        "What if I asked really nicely?",
+                        "Pretty please?",
+                        "With cheesecake? 🍰",
+                        "With kinder joy? 🍫",
+                        "With ramen? 🍜",
+                        "Pookie please? 🥺",
+                        "But... 😢"
+                    ];
+                    
+                    let currentNoMessage = 0;
+                    let yesScale = 1.0;
+                    const scaleIncrement = 0.15;
+                    const maxYesScale = 2.0;
+                    const minNoScale = 0.7;
+
+                    function updateButtonSizes() {
+                        // Calculate new scales
+                        yesScale = Math.min(maxYesScale, 1 + (currentNoMessage * scaleIncrement));
+                        const noScale = Math.max(minNoScale, 1 - (currentNoMessage * 0.05));
+                        
+                        // Apply transformations
+                        yesBtn.style.transform = `scale(${yesScale})`;
+                        noBtn.style.transform = `scale(${noScale})`;
+                        
+                        // Adjust container height if needed
+                        const buttonContainer = document.getElementById('buttonContainer');
+                        if (buttonContainer) {
+                            buttonContainer.style.minHeight = `${60 + (currentNoMessage * 3)}px`;
+                        }
+                        
+                        // Update z-index to ensure the growing button stays on top
+                        if (yesScale > 1.3) {
+                            yesBtn.style.zIndex = '10';
+                            noBtn.style.zIndex = '1';
+                        } else {
+                            yesBtn.style.zIndex = '';
+                            noBtn.style.zIndex = '';
+                        }
+                    }
+
+                    if (yesBtn) {
+                        yesBtn.addEventListener('click', function() {
+                            responseMessage.textContent = "Yay! I'm so happy! I'll be waiting to hear from you soon! ❤️❤️❤️";
+                            responseOverlay.classList.remove('hidden');
+                            
+                            // Reset the game state
+                            currentNoMessage = 0;
+                            updateButtonSizes();
+                            noBtn.textContent = 'Not right now';
+                            questionText.textContent = "I know we haven't talked in a while, but I miss you. Do you think we can talk about us?";
+                        });
+                    }
+
+                    if (noBtn) {
+                        noBtn.addEventListener('click', function() {
+                            // Update to next message
+                            currentNoMessage = (currentNoMessage + 1) % noMessages.length;
+                            noBtn.textContent = noMessages[currentNoMessage];
+                            
+                            // Update button sizes and positions
+                            updateButtonSizes();
+                            
+                            // If we've cycled through all messages, go back to the beginning
+                            if (currentNoMessage === 0) {
+                                // Add a little bounce effect when resetting
+                                noBtn.style.animation = 'none';
+                                void noBtn.offsetWidth; // Trigger reflow
+                                noBtn.style.animation = 'bounce 0.5s';
+                            }
+                        });
+                    }
+
+                    if (closeResponseBtn) {
+                        closeResponseBtn.addEventListener('click', function() {
+                            responseOverlay.classList.add('hidden');
+                        });
+                    }
+
+                    // Close overlay when clicking outside the message box
+                    if (responseOverlay) {
+                        responseOverlay.addEventListener('click', function(e) {
+                            if (e.target === responseOverlay) {
+                                responseOverlay.classList.add('hidden');
+                            }
+                        });
+                    }
+                });
+            </script>
+            
+            <style>
+                @keyframes bounce {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.1); }
+                }
+                
+                #buttonContainer {
+                    will-change: min-height;
+                    transform: translateZ(0);
+                    backface-visibility: hidden;
+                    perspective: 1000px;
+                }
+                
+                #yesBtn, #noBtn {
+                    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    transform-origin: center;
+                    will-change: transform;
+                }
+            </style>
             </p>
             <!-- Mailto link for direct contact -->
-            <a href="mailto:your_email@example.com?subject=Let's Talk" class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75">
-                Let's Talk
-            </a>
-            <p class="text-sm text-gray-400 mt-8">
-                (This will open your email client)
-            </p>
+            
         </div>
     </section>
 

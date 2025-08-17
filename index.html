@@ -1085,5 +1085,26 @@
             }
         });
     </script>
+
+    <!-- Visitor Tracking Script -->
+    <script>
+        // Track page view
+        document.addEventListener('DOMContentLoaded', () => {
+            // Send a notification when the page loads
+            fetch('/api/send-visit-notification', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    timestamp: new Date().toISOString(),
+                    page: window.location.href,
+                    referrer: document.referrer || 'Direct visit'
+                })
+            }).catch(error => {
+                console.error('Error sending visit notification:', error);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -55,19 +55,44 @@ export default async function handler(req, res) {
       data: result,
     });
   } catch (error) {
-    console.error('Error sending email:', {
+    // Log detailed error information
+    const errorDetails = {
       message: error.message,
+      name: error.name,
       code: error.code,
       stack: error.stack,
-      response: error.response?.data
-    });
+      response: error.response?.data,
+      env: {
+        serviceId: process.env.EMAILJS_SERVICE_ID ? 'Set' : 'Missing',
+        templateId: process.env.EMAILJS_TEMPLATE_ID ? 'Set' : 'Missing',
+        publicKey: process.env.EMAILJS_PUBLIC_KEY ? 'Set' : 'Missing',
+        privateKey: process.env.EMAILJS_PRIVATE_KEY ? 'Set' : 'Missing',
+        nodeEnv: process.env.NODE_ENV || 'not set'
+      },
+      request: {
+        method: req.method,
+        url: req.url,
+        headers: req.headers,
+        body: req.body
+      }
+    };
 
+    console.error('Detailed error:', JSON.stringify(errorDetails, null, 2));
+
+    // Return a more detailed error response
     res.status(500).json({
       status: 'error',
       message: 'Failed to send notification',
       error: error.message || 'Unknown error',
       code: error.code,
-      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      envStatus: {
+        serviceId: errorDetails.env.serviceId,
+        templateId: errorDetails.env.templateId,
+        publicKey: errorDetails.env.publicKey ? 'Set' : 'Missing',
+        privateKey: errorDetails.env.privateKey ? 'Set' : 'Missing'
+      },
+      // Only include stack trace in development
+      ...(process.env.NODE_ENV === 'development' && { stack: error.stack })
     });
   }
 }

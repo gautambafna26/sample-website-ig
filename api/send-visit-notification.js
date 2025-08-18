@@ -1,10 +1,7 @@
 const EmailJS = require('@emailjs/nodejs');
 
 // Initialize EmailJS with your public API key
-const emailjs = new EmailJS({
-  publicKey: 'sTmW7RP4RkKdXUA9Z',
-  privateKey: 'AYthjK9f-yz1EjTSLJWUL' // Optional, only needed for certain operations
-});
+const emailjs = EmailJS.init('sTmW7RP4RkKdXUA9Z');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
@@ -22,18 +19,26 @@ module.exports = async (req, res) => {
   };
 
   try {
-    await emailjs.send(
-      'service_01', 
-      'template_01', 
-      templateParams
+    const result = await EmailJS.send(
+      'service_01', // Replace with your service ID
+      'template_01', // Replace with your template ID
+      templateParams,
+      'sTmW7RP4RkKdXUA9Z' // Public key
     );
     
-    res.status(200).json({ message: 'Notification sent successfully' });
+    console.log('Email sent successfully:', result);
+    res.status(200).json({ 
+      status: 'success',
+      message: 'Notification sent successfully',
+      data: result 
+    });
   } catch (error) {
     console.error('Error sending email:', error);
     res.status(500).json({ 
-      message: 'Error sending notification',
-      error: error.message 
+      status: 'error',
+      message: 'Failed to send notification',
+      error: error.message || 'Unknown error occurred',
+      details: error.response?.data || {}
     });
   }
 }

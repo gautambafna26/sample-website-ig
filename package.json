@@ -4,6 +4,7 @@
   "description": "Personal website with email notifications",
   "main": "index.js",
   "dependencies": {
+    "@emailjs/nodejs": "^5.0.2",
     "nodemailer": "^6.9.8"
   }
 }

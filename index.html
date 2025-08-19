@@ -6,6 +6,28 @@
     <!-- <title>For You, My Love ❤️</title> -->
     <!-- Tailwind CSS CDN with custom configuration -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Initialize EmailJS with your public key
+        (function() {
+            emailjs.init({
+                publicKey: 'YOUR_EMAILJS_PUBLIC_KEY', // Replace with your public key
+                blockHeadless: true,
+                blockList: {
+                    // Block all emails from being sent in development
+                    // Remove this in production
+                    '': ''
+                },
+                limitRate: {
+                    // Set the limit rate for the public key
+                    id: 'app',
+                    throttle: 10000, // 10s
+                },
+            });
+        })();
+    </script>
+    <script type="module" src="/js/email-notification.js"></script>
     <script>
         tailwind.config = {
             theme: {

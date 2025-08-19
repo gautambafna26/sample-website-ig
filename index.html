@@ -1108,25 +1108,43 @@
         });
     </script>
 
-    <!-- Visitor Tracking Script -->
-    <script>
-        // Track page view
-        document.addEventListener('DOMContentLoaded', () => {
-            // Send a notification when the page loads
-            fetch('/api/send-visit-notification', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    timestamp: new Date().toISOString(),
-                    page: window.location.href,
-                    referrer: document.referrer || 'Direct visit'
-                })
-            }).catch(error => {
-                console.error('Error sending visit notification:', error);
+    <!-- Visitor Email Notification Script -->
+    <!-- Visitor Email Notification Script -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+    (function() {
+        // Initialize EmailJS with your public key
+        emailjs.init("sTmW7RP4RkKdXUA9Z"); // Replace with your actual Public Key
+    })();
+
+    function sendVisitEmail() {
+        // Prepare email parameters
+        const templateParams = {
+            to_email: 'gautambafna26@gmail.com', // Replace with your email
+            from_name: 'Website Visitor',
+            message: `New visit to your website!\n\n` +
+                     `Page: ${window.location.href}\n` +
+                     `Referrer: ${document.referrer || 'Direct visit'}\n` +
+                     `Time: ${new Date().toLocaleString()}\n` +
+                     `User Agent: ${navigator.userAgent}`,
+            timestamp: new Date().toISOString()
+        };
+
+        // Send the email
+        emailjs.send('service_01ctk4d', 'template_nxr2a3k', templateParams)
+            .then(function(response) {
+                console.log('✅ Email sent successfully!', response.status, response.text);
+            }, function(error) {
+                console.error('❌ Failed to send email:', error);
             });
-        });
-    </script>
+    }
+
+    // Trigger email after page load
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Page has loaded!');
+        sendVisitEmail();
+    });
+</script>
+
 </body>
 </html>

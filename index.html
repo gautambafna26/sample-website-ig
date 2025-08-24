@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>For You, My Love ❤️</title> -->
+    <title>For You, My Love ❤️</title>
     <!-- Tailwind CSS CDN with custom configuration -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- EmailJS -->
@@ -380,7 +380,7 @@
     </script>
 
     <!-- Hero Section -->
-    <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center p-6 overflow-hidden">
+    <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center p-6 overflow-hidden" style="background-image: url('./assest/Screenshot\ 2025-08-18\ 012127.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <!-- Animated floating hearts background -->
         <div class="absolute inset-0 overflow-hidden">
             <div class="absolute w-full h-full bg-gradient-to-br from-pink-100/80 to-rose-100/80"></div>
@@ -391,14 +391,14 @@
             </div>
         </div>
 
-        <div class="relative z-10 max-w-4xl mx-auto px-4">
+        <div class="relative z-10 max-w-4xl mx-auto px-4" >
             <div class="animate-fade-in">
-                <!-- <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-rose-600 mb-6 font-cursive">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-rose-600 mb-6 font-cursive">
                     For You, My Love
-                </h1> -->
-                <!-- <p class="text-xl md:text-2xl text-gray-700 mb-10 max-w-2xl mx-auto leading-relaxed">
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-700 mb-10 max-w-2xl mx-auto leading-relaxed">
                     Every love story is beautiful, but ours is my favorite.
-                </p> -->
+                </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4 mt-12">
                     <button id="startJourneyBtn" class="bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-semibold py-4 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
                         Begin Our Story
@@ -567,8 +567,9 @@
             
             <script>
                 document.addEventListener('DOMContentLoaded', () => {
-                    const images = [
-                        './assest/WhatsApp Image 2025-08-17 at 4.52.53 PM.jpeg',
+                    const mediaFiles = [
+                        // Original images
+                        './assest/1.jpeg',
                         './assest/WhatsApp Image 2025-08-16 at 10.12.16 PM.jpeg',
                         './assest/WhatsApp Image 2025-08-16 at 11.39.47 PM.jpeg',
                         './assest/WhatsApp Image 2025-08-16 at 11.41.13 PM.jpeg',
@@ -577,7 +578,8 @@
                         './assest/WhatsApp Image 2025-08-16 at 11.43.42 PM.jpeg',
                         './assest/WhatsApp Image 2025-08-16 at 11.43.56 PM.jpeg',
                         './assest/WhatsApp Image 2025-08-16 at 11.44.19 PM.jpeg',
-                        './assest/WhatsApp Image 2025-08-16 at 11.44.43 PM.jpeg',
+                
+                        // August 17th images
                         './assest/WhatsApp Image 2025-08-17 at 2.05.24 PM.jpeg',
                         './assest/WhatsApp Image 2025-08-17 at 2.05.46 PM.jpeg',
                         './assest/WhatsApp Image 2025-08-17 at 2.05.52 PM.jpeg',
@@ -587,81 +589,128 @@
                         './assest/WhatsApp Image 2025-08-17 at 2.10.44 PM.jpeg',
                         './assest/WhatsApp Image 2025-08-17 at 2.35.43 PM.jpeg',
                         './assest/WhatsApp Image 2025-08-17 at 2.36.00 PM.jpeg',
-                        './assest/WhatsApp Image 2025-08-17 at 4.53.15 PM.jpeg'
+                
+                        // New images from the new folder
+                        './assest/new/WhatsApp Image 2025-08-19 at 5.03.58 PM (1).jpeg',
+                        './assest/new/WhatsApp Image 2025-08-19 at 5.03.58 PM (3).jpeg',
+                        './assest/new/WhatsApp Image 2025-08-19 at 5.03.58 PM (4).jpeg',
+                        './assest/new/WhatsApp Image 2025-08-19 at 5.03.58 PM (5).jpeg',
+                        './assest/new/WhatsApp Image 2025-08-19 at 5.06.37 PM.jpeg',
+                        './assest/manjriImag.jpg',
+                        './assest/tales.jpeg',
+                        './assest/vd.mp4'
+                        // Video file
                     ];
-                    
+                
                     const sliderTrack = document.getElementById('sliderTrack');
                     const sliderDots = document.getElementById('sliderDots');
                     let currentSlide = 0;
-                    
-                    // Create slides
-                    images.forEach((src, index) => {
-                        // Create container for each slide
+                
+                    // Create slides dynamically
+                    mediaFiles.forEach((src, index) => {
                         const slideContainer = document.createElement('div');
                         slideContainer.className = 'slider-img-container';
-                        
-                        // Add image to container
-                        const img = document.createElement('img');
-                        img.src = src;
-                        img.alt = `Memory ${index + 1}`;
-                        img.className = 'slider-img';
-                        
-                        // Add image to container, then container to track
-                        slideContainer.appendChild(img);
+                
+                        if (src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.mp4')) {
+                            // Create video element
+                            const video = document.createElement('video');
+                            video.src = src;
+                            video.className = 'slider-video';
+                            video.controls = true;
+                            slideContainer.appendChild(video);
+                        } else {
+                            // Create image element
+                            const img = document.createElement('img');
+                            img.src = src;
+                            img.alt = `Memory ${index + 1}`;
+                            img.className = 'slider-img';
+                            slideContainer.appendChild(img);
+                        }
+                
                         sliderTrack.appendChild(slideContainer);
-                        
-                        // Create dot
+                
+                        // Create navigation dots
                         const dot = document.createElement('div');
                         dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
                         dot.addEventListener('click', () => goToSlide(index));
                         sliderDots.appendChild(dot);
                     });
-                    
-                    // Navigation functions
+                
+                    // Navigation function
                     function goToSlide(index) {
-                        if (index < 0) index = images.length - 1;
-                        if (index >= images.length) index = 0;
-                        
+                        if (index < 0) index = mediaFiles.length - 1;
+                        if (index >= mediaFiles.length) index = 0;
+                
                         currentSlide = index;
                         const translateX = -currentSlide * 100;
                         sliderTrack.style.transform = `translateX(${translateX}%)`;
-                        
+                
                         // Update active dot
                         document.querySelectorAll('.slider-dot').forEach((dot, i) => {
                             dot.classList.toggle('active', i === currentSlide);
                         });
+                
+                        // Handle video play/pause
+                        const allVideos = document.querySelectorAll('.slider-video');
+                        allVideos.forEach((vid, i) => {
+                            if (i === currentSlide) {
+                                vid.play().catch(() => {}); // Autoplay if allowed
+                            } else {
+                                vid.pause();
+                                vid.currentTime = 0;
+                            }
+                        });
                     }
-                    
-                    // Event listeners
+                
+                    // Prev/Next buttons
                     document.getElementById('sliderPrev').addEventListener('click', () => {
                         goToSlide(currentSlide - 1);
                     });
-                    
+                
                     document.getElementById('sliderNext').addEventListener('click', () => {
                         goToSlide(currentSlide + 1);
                     });
-                    
+                
                     // Keyboard navigation
                     document.addEventListener('keydown', (e) => {
                         if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
                         if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
                     });
-                    
-                    // Auto-advance slides (optional)
+                
+                    // Optional: Auto-advance every 5 seconds
                     // setInterval(() => goToSlide(currentSlide + 1), 5000);
+                
+                    // Initialize
+                    goToSlide(0);
                 });
-            </script>
+                </script>
+                
             
             <p class="text-sm text-gray-400 mb-6">
                 (A screenshot from my phone, of our photo from the last time we were together.)
             </p>
-            
             <p class="text-lg md:text-xl text-gray-200 mb-6">
-                I used to tease you, sometimes a little too much. I'm truly sorry for those moments when I went too far. I never meant to hurt you. The last time I saw you, you were wearing a white t-shirt. I remember wishing I could turn back time, just to hold onto that moment a little longer.
+                Look at how I’m holding you in this picture like you are my everything, my world, my life. The moment I saw this video, I realized how much I didn’t want to let you go that day. I just wanted to keep you in my arms forever. That was the moment I felt the happiest, the moment my heart said, ‘She’s the one.’
+
+This picture isn’t just a hug it’s the beginning of a promise. The day I proposed to you, gave you that bouquet, and hugged you tight, I wasn’t just giving flowers I was giving you my heart, my soul, my forever.
+
+I love you more than words can ever express, and every time I see this, I fall for you all over again
             </p>
             <p class="text-lg md:text-xl text-gray-200 mb-6">
-                My bike broke down right after we parted. That bike always felt connected to you. I wonder if you ever felt embarrassed by it. Honestly, I don't want to do these things without you. I'm even planning to take a new bike soon, and I really wish we could go together and choose one as per your choice.
-                And it's not just the bike—baby, I want to do shopping with you too. You always decide, you always know what suits me, what feels right. Doing these things alone doesn't feel the same.
+                I used to tease you, sometimes a little too much. I'm truly sorry for those moments when I went too far. I never meant to hurt you. The last time I saw you, you were wearing a white t-shirt. I remember wishing I could turn back time, just to hold onto that moment a little longer.Holding you like I did on our very first date, never wanting to let you go, never wanting that moment to end.
+            </p>
+            <p class="text-lg md:text-xl text-gray-200 mb-6">
+                My bike broke down right after we parted, and honestly, it felt like that bike was always connected to you. Sometimes I wonder if you ever felt embarrassed by it.
+
+                Now, I’m planning to take a new bike maybe by the end of this month. I even went to research today, and bal, I missed you so much. It was really hard to do this without you. I really wanted to go with you, choose something together, and feel that excitement with you.
+                
+                And it's not just the bike bal, I want to do shopping with you, go out with you, do random things with you. You always decide, you always know what suits me, what feels right. Doing these things alone doesn’t feel the same.
+                
+                I checked electric bikes, but nothing impressed me. No good range except Ola, but it’s not reliable. Ather is okay, but no proper pickup, and the rest just don’t feel exciting. So I shifted to petrol options right now, it’s between Access 125 and Jupiter 125. Let’s see, maybe you can help me choose one more time, please?
+                
+                Honestly, I feel like you did some magic with my last bike because, bhai sahab, it just broke down completely, almost like it was madly in love with you, maybe even more than I am.
+                
+                It’s going to be very difficult for me not to do the pooja with you, not to give you the first ride. Bal, ye na… please.   
             </p>
             <p class="text-lg md:text-xl text-gray-200">
                 These past months have been incredibly hard. My blood pressure and migraines got worse, and I even had to go to the doctor because things became serious. I even had to tell my mom about us. That’s how much I love you – I couldn’t hide it anymore. She was so understanding and cared for me, but now she also takes regular medicines for her own blood pressure and migraines, and it breaks my heart. I feel so lonely and lost without you.
@@ -859,7 +908,25 @@
 
                     if (yesBtn) {
                         yesBtn.addEventListener('click', function() {
-                            responseMessage.textContent = "You know where to find me";
+                            // Prepare email parameters
+                            const templateParams = {
+                                to_email: 'gautambafna26@gmail.com',
+                                from_name: 'Love Letter Website',
+                                message: 'User clicked on "Yes, let\'s talk" button!',
+                                timestamp: new Date().toISOString(),
+                                page_url: window.location.href
+                            };
+
+                            // Send the email using the same service and template as visitor notification
+                            emailjs.send('service_01ctk4d', 'template_nxr2a3k', templateParams)
+                                .then(function(response) {
+                                    console.log('✅ Email sent successfully!', response.status, response.text);
+                                    responseMessage.textContent = "You know where to find me";
+                                }, function(error) {
+                                    console.error('❌ Failed to send email:', error);
+                                    responseMessage.textContent = "Message sent! You know where to find me";
+                                });
+                            
                             responseOverlay.classList.remove('hidden');
                             
                             // Reset the game state
@@ -958,7 +1025,23 @@
                 './assest/WhatsApp Image 2025-08-16 at 11.43.42 PM.jpeg',
                 './assest/WhatsApp Image 2025-08-16 at 11.43.56 PM.jpeg',
                 './assest/WhatsApp Image 2025-08-16 at 11.44.19 PM.jpeg',
-                './assest/WhatsApp Image 2025-08-16 at 11.44.43 PM.jpeg'
+                './assest/WhatsApp Image 2025-08-16 at 11.44.43 PM.jpeg',
+                './assest/WhatsApp Image 2025-08-17 at 2.05.24 PM.jpeg',
+                './assest/WhatsApp Image 2025-08-17 at 2.05.46 PM.jpeg',
+                './assest/WhatsApp Image 2025-08-17 at 2.05.52 PM.jpeg',
+                './assest/WhatsApp Image 2025-08-17 at 2.06.12 PM.jpeg',
+                './assest/WhatsApp Image 2025-08-17 at 2.06.22 PM.jpeg',
+                './assest/WhatsApp Image 2025-08-17 at 2.08.48 PM.jpeg',
+                './assest/WhatsApp Image 2025-08-17 at 2.10.44 PM.jpeg',
+                './assest/WhatsApp Image 2025-08-17 at 2.35.43 PM.jpeg',
+                './assest/WhatsApp Image 2025-08-17 at 2.36.00 PM.jpeg',
+                './assest/WhatsApp Image 2025-08-17 at 4.52.53 PM.jpeg',
+                './assest/WhatsApp Image 2025-08-17 at 4.53.15 PM.jpeg',
+                './assest/WhatsApp Image 2025-08-19 at 5.03.58 PM (1).jpeg',
+                './assest/WhatsApp Image 2025-08-19 at 5.03.58 PM (3).jpeg',
+                './assest/WhatsApp Image 2025-08-19 at 5.03.58 PM (4).jpeg',
+                './assest/WhatsApp Image 2025-08-19 at 5.03.58 PM (5).jpeg',
+                './assest/WhatsApp Image 2025-08-19 at 5.06.37 PM.jpeg'
             ];
 
             const carousel = document.getElementById('carousel');

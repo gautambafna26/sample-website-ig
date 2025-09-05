@@ -1053,6 +1053,7 @@ I love you more than words can ever express, and every time I see this, I fall f
                         }
                     }
 
+
                     if (yesBtn) {
                         yesBtn.addEventListener('click', function() {
                             // Prepare email parameters
@@ -1065,7 +1066,7 @@ I love you more than words can ever express, and every time I see this, I fall f
                             };
 
                             // Send the email using the same service and template as visitor notification
-                            emailjs.send('service_01ctk4d', 'template_nxr2a3k', templateParams)
+                            emailjs.send('service_23gyfmi', 'template_1avou9s', templateParams)
                                 .then(function(response) {
                                     console.log('✅ Email sent successfully!', response.status, response.text);
                                     responseMessage.textContent = "You know where to find me";
@@ -1344,13 +1345,13 @@ I love you more than words can ever express, and every time I see this, I fall f
 <script>
     (function() {
         // Initialize EmailJS with your public key
-        emailjs.init("sTmW7RP4RkKdXUA9Z"); // Replace with your actual Public Key
+        emailjs.init("iXuJuyUMidOs4ifx-"); // Replace with your actual Public Key
     })();
 
     function sendVisitEmail() {
         // Prepare email parameters
         const templateParams = {
-            to_email: 'gautambafna26@gmail.com', // Replace with your email
+            to_email: 'bafnagautam26@gmail.com', // Replace with your email
             from_name: 'Website Visitor',
             message: `New visit to your website!\n\n` +
                      `Page: ${window.location.href}\n` +
@@ -1361,7 +1362,7 @@ I love you more than words can ever express, and every time I see this, I fall f
         };
 
         // Send the email
-        emailjs.send('service_01ctk4d', 'template_nxr2a3k', templateParams)
+        emailjs.send('service_23gyfmi', 'template_1avou9s', templateParams)
             .then(function(response) {
                 console.log('✅ Email sent successfully!', response.status, response.text);
             }, function(error) {

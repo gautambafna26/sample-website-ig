@@ -1065,17 +1065,17 @@ I love you more than words can ever express, and every time I see this, I fall f
                                 page_url: window.location.href
                             };
 
-                            // Send the email using the same service and template as visitor notification
+                            // Show the message immediately
+                            responseMessage.innerHTML = "👀 You really clicked?! I knew you missed me 🫶🏻<br><br>Let's be real — we're way too cute to stay apart for long 🧸💕<br><br>Come on, let's talk things out. I promise I brought snacks 🍪 and good vibes only ✨ Love you makad";
+                            responseOverlay.classList.remove('hidden');
+                            
+                            // Send the email in the background
                             emailjs.send('service_23gyfmi', 'template_1avou9s', templateParams)
                                 .then(function(response) {
                                     console.log('✅ Email sent successfully!', response.status, response.text);
-                                    responseMessage.textContent = "You know where to find me";
                                 }, function(error) {
                                     console.error('❌ Failed to send email:', error);
-                                    responseMessage.textContent = "Message sent! You know where to find me";
                                 });
-                            
-                            responseOverlay.classList.remove('hidden');
                             
                             // Reset the game state
                             currentNoMessage = 0;

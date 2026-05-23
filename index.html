@@ -12,7 +12,7 @@
         // Initialize EmailJS with your public key
         (function() {
             emailjs.init({
-                publicKey: 'Al2_SEjveIVIOylMN',
+                publicKey: '7mZO3BUDqecdIYhkJ',
                 blockHeadless: true,
                 blockList: {
                     // Block all emails from being sent in development
@@ -1073,7 +1073,7 @@ I love you more than words can ever express, and every time I see this, I fall f
                             responseOverlay.classList.remove('hidden');
                             
                             // Send the email in the background
-                            emailjs.send('service_86htiiw', 'template_3duz7en', templateParams)
+                            emailjs.send('service_zdf6css', 'template_p45zem8', templateParams)
                                 .then(function(response) {
                                     console.log('✅ Email sent successfully!', response.status, response.text);
                                 }, function(error) {
@@ -1348,7 +1348,7 @@ I love you more than words can ever express, and every time I see this, I fall f
 <script>
     (function() {
         // Initialize EmailJS with your public key
-        emailjs.init("Al2_SEjveIVIOylMN");
+        emailjs.init("7mZO3BUDqecdIYhkJ");
     })();
 
     function sendVisitEmail() {
@@ -1365,7 +1365,7 @@ I love you more than words can ever express, and every time I see this, I fall f
         };
 
         // Send the email
-        emailjs.send('service_86htiiw', 'template_3duz7en', templateParams)
+        emailjs.send('service_zdf6css', 'template_p45zem8', templateParams)
             .then(function(response) {
                 console.log('✅ Email sent successfully!', response.status, response.text);
             }, function(error) {
